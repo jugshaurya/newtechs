@@ -53,3 +53,7 @@ If you need to add attributes like, for example, className, add it to the a tag,
 First, let’s talk about how Next.js handles static assets such as images.
 
 Next.js can serve static files, like images, under the top-level public directory. Files inside public can be referenced from the root of the application similar to pages.
+
+## GraphQL
+
+[Learn](https://www.howtographql.com/)
