@@ -1,29 +1,61 @@
 import React from 'react';
 import timeDifferenceForDate from '../utils/timeDifferenceForDate';
 import { AUTH_TOKEN } from '../constants';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
 
-const Link = ({ link, index }) => {
+const VOTES_MUTATION = gql`
+  mutation VotesMutation($linkId: ID!) {
+    vote(linkId: $linkId) {
+      id
+      link {
+        id
+        votes {
+          id
+          user {
+            id
+          }
+        }
+      }
+      user {
+        id
+      }
+    }
+  }
+`;
+
+const Link = ({ link, index, updateStoreAfterVote }) => {
   const authToken = localStorage.getItem(AUTH_TOKEN);
+  const { description, url, votes, postedBy, createdAt, id } = link;
 
-  const _voteForLink = () => {};
   return (
     <div className="flex mt2 items-start">
       <div className="flex items-center">
         <span className="gray">{index + 1}.</span>
         {authToken && (
-          <div className="ml1 gray f11" onClick={() => _voteForLink()}>
-            ▲
-          </div>
+          <Mutation
+            mutation={VOTES_MUTATION}
+            variables={{ linkId: id }}
+            update={(store, { data: { vote } }) =>
+              updateStoreAfterVote(store, vote, id)
+            }>
+            {(voteMutation) => {
+              return (
+                <div className="ml1 gray f11" onClick={voteMutation}>
+                  ▲
+                </div>
+              );
+            }}
+          </Mutation>
         )}
       </div>
       <div className="ml1">
         <div>
-          {link.description} ({link.url})
+          {description} ({url})
         </div>
         <div className="f6 lh-copy gray">
-          {link.votes.length} votes | by{' '}
-          {link.postedBy ? link.postedBy.name : 'Unknown'}{' '}
-          {timeDifferenceForDate(link.createdAt)}
+          {votes.length} votes | by {postedBy ? postedBy.name : 'Unknown'}{' '}
+          {timeDifferenceForDate(createdAt)}
         </div>
       </div>
     </div>
