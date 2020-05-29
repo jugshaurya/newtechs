@@ -23,7 +23,9 @@ const LinkList = () => {
           if (error) return <h2>Error</h2>;
           if (loading) return <h2>Loading</h2>;
           const links = data.feed.links;
-          return links.map((link) => <Link key={link.id} link={link} />);
+          return links.map((link, index) => (
+            <Link key={link.id} link={link} index={index} />
+          ));
         }}
       </Query>
     </div>

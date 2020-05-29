@@ -3,6 +3,7 @@ import '../styles/App.css';
 import LinkList from './LinkList';
 import CreateLink from './CreateLink';
 import Header from './Header';
+import Login from './Login';
 import { Switch, Link, Route } from 'react-router-dom';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <div className="ph3 pv1 background-gray">
         <Switch>
           <Route exact path="/" component={LinkList} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/create" component={CreateLink} />
         </Switch>
       </div>

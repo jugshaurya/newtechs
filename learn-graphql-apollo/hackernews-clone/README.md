@@ -1,5 +1,15 @@
 ## HackerNews Clone-
 
+## run
+
+```
+yarn start
+&& in new terminal
+cd server && yarn start
+```
+
+## Installation
+
 ```
 yarn add apollo-boost react-apollo graphql
 add Tachyons link in public.index.html
