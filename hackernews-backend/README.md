@@ -77,4 +77,7 @@ GraphQL requires you to `design a schema` which in turn defines the API of your 
 
 - the schema definition
 - the actual implementation in the form of resolver functions
-- . Note however when querying an object type, it is required that you query at least one of its fields in a selection set.
+- Note however when querying an object type, it is required that you query at least one of its fields in a selection set.
+- **Not only root fields, but virtually all fields on the types in a GraphQL schema have resolver functions.** or every field inside the schema definition is backed by one resolver function whose responsibility it is to return the data for precisely that field.
+
+- Effectively, everything the GraphQL server has to do is invoke all resolver functions for the fields that are contained in the query and then package up the response according to the query’s shape. Query resolution thus merely becomes a process of orchestrating the invocation of resolver functions!
