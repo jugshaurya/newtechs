@@ -6,6 +6,12 @@ who loves web development and learning new technologies that make it even more e
 mkdir hackernews-node
 cd hackernews-node
 yarn init -y
+
+## after prisma yml/datamodel files
+## - free demo database (AWS Aurora) that’s hosted in Prisma Cloud.
+npx prisma deploy
+npx prisma generate
+
 ```
 
 #### Goal-
