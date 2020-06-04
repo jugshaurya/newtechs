@@ -1,0 +1,41 @@
+query getIssuesOfRepoQuery(
+  $organization: String!
+  $repository: String!
+  $cursor: String
+) {
+  organization(login: $organization) {
+    name
+    url
+    repository(name: $repository) {
+      name
+      url
+      issues(first: 5, after: $cursor) {
+        edges {
+          node {
+            id
+            title
+            url
+            reactions(last: 3) {
+              edges {
+                node {
+                  id
+                  content
+                }
+              }
+            }
+          }
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
+}
+
+# 🐥 If it was Rest API
+# 🐥 minimum Queries are : with overfetching at some level and underfetching at others
+# 🐥 /org/"df"/repository/"er"/issues?limit:5,skip=5*n
+# 🐥 /issue/reactions?last=3 => edge ,totalCount,page

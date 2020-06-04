@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ISSUE_QUERY from './query.graphql';
 
 // Features:
 // - Star/Unstar a repository
 
-const TITLE = 'React GraphQL GitHub Client';
 const axiosGithub = axios.create({
   baseUrl: 'https://api.github.com/graphql',
   headers: {
@@ -12,70 +12,73 @@ const axiosGithub = axios.create({
   },
 });
 
-const getIssuesOfOrgRepo = () => {
-  return ` 
-    query ($organization: String!, repository: String!) {
-      organization(login: $organization) {
-        name
-        url
-        repository(name:$repository) {
-          name
-          url
-          issues(last:5) {
-            edges{
-              node{
-                id
-                title
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-};
-
 class App extends Component {
   state = {
-    path: '',
+    path: 'facebook/create-react-app',
     organization: null,
-    repository: null,
-    issues: null,
     errors: null,
   };
 
-  componentDidMount() {}
+  componentDidMount = () => {
+    this.fetchIssues();
+  };
 
   onChange = (event) => {
     this.setState({ path: event.target.value });
   };
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
     this.fetchIssues();
-  }
+  };
 
-  fetchIssues(organization, repository) {
+  handleMoreIssuesFetch = () => {
+    this.fetchIssues();
+  };
+
+  fetchIssues = () => {
+    const { path } = this.state;
+    const [organization, repository] = path.split('/');
+    const cursor = organization?.repository.issues.edges.pageInfo.endCursor;
+
     axiosGithub
       .post('', {
-        query: getIssuesOfOrgRepo(),
-        variables: { organization, repository },
+        query: ISSUE_QUERY,
+        variables: { organization, repository, cursor },
       })
       .then((result) => {
-        console.log(result);
-        const { organization } = result.data.data;
-        this.setState({
-          organization,
-          repository: organization.repository,
-          issues: organization.repository.issues,
-          errors: result.data.errors,
-        });
+        const { data, errors } = result.data;
+
+        if (!cursor) {
+          return this.setState({
+            organization: data.organization,
+            errors,
+          });
+        }
+
+        const updatedStateWithMoreIssues = {
+          organization: {
+            ...organization,
+            repository: {
+              ...organization.repository,
+              issues: {
+                ...organization.repository.issues,
+                edges: {
+                  ...organization.repository.issues.edges,
+                  ...data.organization.repository.issues.edges,
+                },
+              },
+            },
+          },
+          errors,
+        };
+        this.setState(updatedStateWithMoreIssues);
       });
-  }
+  };
 
   render() {
-    const { path, errors, organization, repository, issues } = this.state;
+    const { path, errors, organization } = this.state;
+    const { repository, issues } = organization;
     return (
       <React.Fragment>
         <h2 className="app">GraphQL</h2>
@@ -92,30 +95,54 @@ class App extends Component {
           <button type="submit">Search</button>
         </form>
         <hr />
-        <div id="result">
-          {organization && (
-            <React.Fragment>
-              <div>
-                Organizations: {organization.name} === ({organization.url})
-              </div>
-              <div>
-                Repo: {repository.name} === ({repository.url})
-              </div>
-              <div className="issues">
-                <ul>
-                  {issues.edges.map((issue) => {
-                    return (
-                      <li>
-                        {issue.nodes.id} | {issue.nodes.title}|{' '}
-                        {issue.nodes.url}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </React.Fragment>
-          )}
-        </div>
+        {errors ? (
+          <div className="error">
+            Something is wrong {JSON.stringify(errors)}
+          </div>
+        ) : (
+          <div className="result">
+            {organization && (
+              <React.Fragment>
+                <div className="org">
+                  Organizations:{' '}
+                  <a href={organization.url} target="_blank">
+                    {organization.name}
+                  </a>
+                </div>
+
+                <div className="repo">
+                  Repo:{' '}
+                  <a href={repository.url} target="_blank">
+                    {repository.name}
+                  </a>
+                </div>
+
+                <div className="issues">
+                  <ul>
+                    {issues.edges.map((issue) => {
+                      return (
+                        <li key={issue.node.id}>
+                          <a href={issue.node.url}>{issue.node.title}</a>
+                          <ul>
+                            {issue.node.reactions.edges.map((reaction) => (
+                              <li key={reaction.id}>{reaction.content}</li>
+                            ))}
+                          </ul>
+                        </li>
+                      );
+                    })}
+                    <hr />
+                    {issues.pageInfo.hasNextPage && (
+                      <button onClick={this.handleMoreIssuesFetch}>
+                        ..More..
+                      </button>
+                    )}
+                  </ul>
+                </div>
+              </React.Fragment>
+            )}
+          </div>
+        )}
       </React.Fragment>
     );
   }
