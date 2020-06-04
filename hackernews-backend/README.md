@@ -11,7 +11,14 @@ yarn init -y
 ## - free demo database (AWS Aurora) that’s hosted in Prisma Cloud.
 npx prisma deploy
 npx prisma generate
+yarn add prisma-client-lib
 
+```
+
+## Start the app
+
+```
+node src/index.js
 ```
 
 #### Goal-

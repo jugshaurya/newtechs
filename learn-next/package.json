@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start"
   },
-  "keywords": ["next"],
+  "keywords": [
+    "next"
+  ],
   "author": "Shaurya Singhal",
   "dependencies": {
+    "classnames": "^2.2.6",
     "next": "9.4.2",
     "react": "16.13.1",
     "react-dom": "16.13.1"

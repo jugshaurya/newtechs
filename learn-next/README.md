@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -10,21 +8,62 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Next.js: The React Framework
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Enter Next.js, the React Framework. Next.js provides a solution to all of the above problems. But more importantly, it puts you and your team in the pit of success when building React applications.
 
-## Learn More
+Next.js has the best-in-class "Developer Experience" and many built-in features; a sample of them are:
 
-To learn more about Next.js, take a look at the following resources:
+An intuitive page-based routing system (with support for dynamic routes)
+Pre-rendering, both static generation (SSG) and server-side rendering (SSR) are supported on a per-page basis
+Automatic code splitting for faster page loads
+Client-side routing with optimized prefetching
+Built-in CSS and Sass support, and support for any CSS-in-JS library
+Development environment which supports Hot Module Replacement
+API routes to build API endpoints with Serverless Functions
+Fully extendable
+Next.js is used in tens of thousands of production-facing websites and web applications, including many of the world's largest brands.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+  npx create-next-app appname
+  cd appname
+  yarn dev
 
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js/) - your feedback and contributions are welcome!
+```
 
-## Deploy on Vercel
+## Pages in Next.js
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Pages are associated with a route based on their file name.
+- Simply create a JS file under the pages directory, and the path to the file becomes the URL path.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Link Component
+
+- When linking between pages on websites you generally use the <a> HTML tag.
+
+- In Next.js, you use the <Link> React Component that wraps the <a> tag. <Link> allows you to do client-side navigation to a different page in the application.
+
+- The Link component enables client-side navigation between two pages in the same Next.js app.
+
+- Client-side navigation means that the page transition happens using JavaScript, which is faster than the default navigation done by the browser.
+
+- Next.js automatically optimizes your application for the best performance by code splitting, client-side navigation, and prefetching (in production).
+
+You create routes as files under pages and use the built-in Link component. No routing libraries are required.
+
+## Note:
+
+Note: If you need to link to an external page outside the Next.js app, just use an <a> tag without Link.
+
+If you need to add attributes like, for example, className, add it to the a tag, not to the Link tag.
+
+## Assets
+
+First, let’s talk about how Next.js handles static assets such as images.
+
+Next.js can serve static files, like images, under the top-level public directory. Files inside public can be referenced from the root of the application similar to pages.
+
+```
+- To use CSS Modules, import a CSS file named *.module.css from any component.
+
+- To use global CSS, import a CSS file in pages/_app.js
+```
