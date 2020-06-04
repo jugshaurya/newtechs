@@ -1,0 +1,130 @@
+# Query Mutation Subscription
+# ---
+
+mutation AddStar($repoId: String!){
+  addStar(input: { starrableId: $repoId }){
+    starrable{
+      id
+      viewerHasStarred
+    }
+  }
+}
+
+
+
+
+{
+  "data:{
+    "addStar": {
+      "starrable":{
+        "id":"dihsgida3928reifdh",
+        "viewerHasStarred: true
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+# directive
+query ($organization: String! , $repository: String!, $withFork: Boolean!) {
+  organization(login: $organization){
+    name
+    url
+    repository(name : $repository){
+      name
+      forkCount @include(if: $withFork)
+    } 
+  }
+}
+
+variables = {
+  organization :"value",
+  repository:"value" 
+  withFork: true
+}
+
+# variables
+query getOrganization($organization: String = "default value") {
+  organization(login: $organization){
+    name
+    url
+  }
+}
+
+query getOrganization($organization: String!) {
+  organization(login: $organization){
+    name
+    url
+  }
+}
+
+query ($organization: String!) {
+  organization(login: $organization){
+    name
+    url
+  }
+}
+
+
+
+{
+  road: organization(login: "the-road-to-learn-react") {
+    ...sharedOrgainzationFields
+  
+  }
+  facebook: organization(login: "facebook") {
+    ...sharedOrgainzationFields
+  }
+}
+
+# fragment <name> on <Type>
+fragment sharedOrganizatonFields on Organization {
+  name
+  url
+}
+
+
+
+
+
+
+
+
+
+{
+  road: organization(login: "the-road-to-learn-react") {
+    name
+    url
+  }
+  facebook: organization(login: "facebook") {
+    name
+    url
+  }
+}
+
+
+# result
+
+{
+  "data": {
+    "road" : {
+      "organization":{
+        "name":"the-road-to-learn-react"
+        "url": "https://the-road-to-learn-react.com"
+      }
+    },
+    "facebook" : {
+      "organization":{
+        "name":"the-facebook-to-learn-react"
+        "url": "https://the-facebook-to-learn-react.com"
+      }
+    }
+  }
+}
