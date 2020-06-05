@@ -1,74 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Learn To GraphQL
 
-## Available Scripts
+- Section A ✔✔
 
-In the project directory, you can run:
+  - ✔ using axios to resolve the graphql queries and mutation.
+  - ✔ used : axios
 
-### `npm start`
+- Section B ✔
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  - ✔ Learning that Apollo Client with `Apollo-Boost`can also resolve graphql queries and mutation with being added to the view-layer(React.js).
+  - ✔ Hence learning only the data-layer part @commandLine
+  - ✔ used: apollo-boost, graphql
+  - ✔ The apollo-boost package gives access to a zero-configuration Apollo Client, and the graphql package allows GraphQL queries, mutations, and subscriptions on both the client and server.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Section C
 
-### `npm test`
+  - Adding React to connect viewLayer and data layer
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Section D
 
-### `npm run build`
+  - Nodejs Backend with GraphQL and Apollo
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - The GraphQL query language is implemented as a reference implementation in JavaScript by Facebook, while Apollo Server builds on it to simplify building GraphQL servers in JavaScript.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+    - apollo-server , apollo-server-express, express , graphql
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - The GraphQL schema provided to the Apollo Server is all the available data for reading and writing
+    data via GraphQL.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-### Auth
-
-- created a user collection to store users
-- encrypt the password using bcrypt
-- store in db if not alreasdy exist and send response accordingly
+  - Resolvers are functions that resolve data for your GraphQL schema fields.
+  - The schema doesn’t define where the data comes from. This responsibility is handled by resolvers outside of the SDL.
+  - When you define GraphQL type definitions, there must be conscious decisions about the types, relationships, structure and (non-null) fields.
+  - Each top level query in your Query type has to have a resolver.
+  - Resolver arguments: (parent , args, context, info ) // pac i // pacman install
+    - parent : returns the previously resolved field.
+    - args : returns the argument object passed to fields.
+    - context: use to inject depedencies from the outside to resolver functions. passed to apollo-client
+    - info: Isn’t used very often, because it only gives you internal information about the GraphQL request. It can be used for debugging, error handling, advanced monitoring, and tracking.

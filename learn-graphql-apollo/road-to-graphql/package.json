@@ -1,12 +1,8 @@
 {
-  "name": "react-learn-1",
-  "version": "0.1.0",
+  "name": "road-to-graphql",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "^7.6.0",
-    "bootstrap": "^4.3.1",
-    "font-awesome": "^4.7.0",
-    "jwt-decode": "^2.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.0",
