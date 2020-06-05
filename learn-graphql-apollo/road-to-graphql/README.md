@@ -32,7 +32,10 @@
   - When you define GraphQL type definitions, there must be conscious decisions about the types, relationships, structure and (non-null) fields.
   - Each top level query in your Query type has to have a resolver.
   - Resolver arguments: (parent , args, context, info ) // pac i // pacman install
+
     - parent : returns the previously resolved field.
     - args : returns the argument object passed to fields.
     - context: use to inject depedencies from the outside to resolver functions. passed to apollo-client
     - info: Isn’t used very often, because it only gives you internal information about the GraphQL request. It can be used for debugging, error handling, advanced monitoring, and tracking.
+
+  - Note the extend statement on the Query and Mutation types. Since you have more than one of those types now, you need to extend the types.
