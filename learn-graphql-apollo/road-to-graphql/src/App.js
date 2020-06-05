@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ISSUE_QUERY from './query.graphql';
+import ISSUE_QUERY from './issues.query.graphql';
+import ADD_STAR_MUTATION from './addstar.mutation.graphql';
+import REMOVE_STAR_MUTATION from './removeStar.mutation.graphql';
 
 // Features:
-// - Star/Unstar a repository
+// Query - Organization-repos-issues
+// Mutation - Star/Unstar a repository
 
 const axiosGithub = axios.create({
   baseUrl: 'https://api.github.com/graphql',
@@ -76,12 +79,40 @@ class App extends Component {
       });
   };
 
+  handleStarUnstar = (repositoryId, viewerHasStarred) => {
+    axiosGithub
+      .post('', {
+        query: viewerHasStarred ? REMOVE_STAR_MUTATION : ADD_STAR_MUTATION,
+        variables: { repositoryId },
+      })
+      .then((result) => {
+        const { viewerHasStarred } = result.data.data.addStar.starrable;
+        const updatedStateWithHasStarred = {
+          organization: {
+            ...organization,
+            repository: {
+              ...organization.repository,
+              viewerHasStarred,
+              stargazers: {
+                ...organization.repository.stargazers,
+                totalCount:
+                  organization.repository.stargazers.totalCount +
+                  (viewerHasStarred ? 1 : -1),
+              },
+            },
+          },
+        };
+        this.setState(updatedStateWithHasStarred);
+      });
+  };
+
   render() {
     const { path, errors, organization } = this.state;
     const { repository, issues } = organization;
+
     return (
       <React.Fragment>
-        <h2 className="app">GraphQL</h2>
+        <h2 className="app">GraphQL Github API</h2>
         <form onSubmit={this.onSubmit}>
           <label htmlFor="url">Show open issues for https://github.com/</label>
           <input
@@ -95,10 +126,9 @@ class App extends Component {
           <button type="submit">Search</button>
         </form>
         <hr />
+
         {errors ? (
-          <div className="error">
-            Something is wrong {JSON.stringify(errors)}
-          </div>
+          <Error errors={errors} />
         ) : (
           <div className="result">
             {organization && (
@@ -115,6 +145,16 @@ class App extends Component {
                   <a href={repository.url} target="_blank">
                     {repository.name}
                   </a>
+                  <button
+                    onClick={() =>
+                      this.handleStarUnstar(
+                        repository.id,
+                        repository.viewerHasStarred,
+                      )
+                    }>
+                    {repository.stargazers.totalCount}
+                    {repository.viewerHasStarred ? 'Unstar' : 'Star'}
+                  </button>
                 </div>
 
                 <div className="issues">

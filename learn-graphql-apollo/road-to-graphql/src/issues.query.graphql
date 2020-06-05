@@ -7,8 +7,13 @@ query getIssuesOfRepoQuery(
     name
     url
     repository(name: $repository) {
+      id
       name
       url
+      viewerHasStarred
+      stargazers {
+        totalCount
+      }
       issues(first: 5, after: $cursor) {
         edges {
           node {
