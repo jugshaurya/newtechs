@@ -4,6 +4,7 @@
 
   - ✔ using axios to resolve the graphql queries and mutation.
   - ✔ used : axios
+  - run - got to Section A repo and run code there
 
 - Section B ✔
 
@@ -11,10 +12,11 @@
   - ✔ Hence learning only the data-layer part @commandLine
   - ✔ used: apollo-boost, graphql
   - ✔ The apollo-boost package gives access to a zero-configuration Apollo Client, and the graphql package allows GraphQL queries, mutations, and subscriptions on both the client and server.
+  - run - yarn start inside section B
 
 - Section C
 
-  - Adding React to connect viewLayer and data layer
+  - Adding React to connect viewLayer and data layer.
 
 * Section D
 

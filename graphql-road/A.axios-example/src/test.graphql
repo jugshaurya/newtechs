@@ -10,9 +10,6 @@ mutation AddStar($repoId: String!){
   }
 }
 
-
-
-
 {
   "data:{
     "addStar": {
@@ -23,14 +20,6 @@ mutation AddStar($repoId: String!){
     }
   }
 }
-
-
-
-
-
-
-
-
 
 # directive
 query ($organization: String! , $repository: String!, $withFork: Boolean!) {
@@ -72,8 +61,6 @@ query ($organization: String!) {
   }
 }
 
-
-
 {
   road: organization(login: "the-road-to-learn-react") {
     ...sharedOrgainzationFields
@@ -90,14 +77,6 @@ fragment sharedOrganizatonFields on Organization {
   url
 }
 
-
-
-
-
-
-
-
-
 {
   road: organization(login: "the-road-to-learn-react") {
     name
@@ -108,8 +87,6 @@ fragment sharedOrganizatonFields on Organization {
     url
   }
 }
-
-
 # result
 
 {

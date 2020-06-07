@@ -1,7 +1,0 @@
-mutation RemoveStar($repositoryId: ID!) {
-  removeStar(input: { starrableId: $repositoryId }) {
-    starrableId {
-      viewerHasStarred
-    }
-  }
-}

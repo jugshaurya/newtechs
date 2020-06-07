@@ -1,7 +1,0 @@
-mutation AddStar($repositoryId: ID!) {
-  addStar(input: { starrableId: $repositoryId }) {
-    starrableId {
-      viewerHasStarred
-    }
-  }
-}
