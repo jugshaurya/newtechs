@@ -1,0 +1,1 @@
+{"name":"learn-next","version":"0.1.0","private":true,"scripts":{"dev":"next dev","build":"next build","start":"next start"},"keywords":["next"],"author":{"name":"Shaurya Singhal"},"dependencies":{"classnames":"^2.2.6","next":"9.4.2","react":"16.13.1","react-dom":"16.13.1"},"readme":"ERROR: No README data found!","_id":"learn-next@0.1.0"}
