@@ -17,6 +17,17 @@
 - Section C
 
   - Adding React to connect viewLayer and data layer.
+  - ✔ yarn add
+
+    - apollo-client
+    - apollo-link
+    - apollo-link-http (used to configure the URI and additional network information once for an Apollo Client instance)
+    - apollo-link-error
+    - apollo-cache-inmemory (The apollo-cache-inmemory is a recommended cache (read also as: store or state) for your Apollo)
+    - graphql
+    - graphql-tag
+    - react-apollo
+    - @apollo/react-hooks
 
 * Section D
 
