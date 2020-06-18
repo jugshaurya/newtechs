@@ -17,6 +17,27 @@ const MY_REPOS = gql`
           node {
             id
             name
+            stargazers {
+              totalCount
+            }
+            watchers {
+              totalCount
+            }
+            viewerHasStarred
+            viewerSubscription
+            descriptionHTML
+            owner {
+              login
+              url
+            }
+            languages(first: 10) {
+              edges {
+                node {
+                  id
+                  name
+                }
+              }
+            }
           }
         }
       }
