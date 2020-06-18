@@ -1,0 +1,7 @@
+type Person {
+  name: String!
+}
+
+type Query {
+  onePerson(id: ID!): Person!
+}
