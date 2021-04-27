@@ -1,1 +1,1 @@
-## Grpahql
+## Graphql
