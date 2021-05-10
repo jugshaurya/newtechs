@@ -1,0 +1,15 @@
+.color-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.color-button button {
+  background: salmon;
+  border: 13px double gold;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+}
